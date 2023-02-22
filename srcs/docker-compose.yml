@@ -5,16 +5,22 @@ services:
     build:
     ports:
     networks:
+    volumes:
     restart: "on-failure"
   wordpress:
     build:
     ports:
     networks:
+    volumes:
     restart: "on-failure"
+    depends_on:
+      - mariadb
   nginx:
     build:
     ports:
     networks:
     restart: "on-failure"
+    depends_on:
+      - wordpress
 volumes:
 networks:
