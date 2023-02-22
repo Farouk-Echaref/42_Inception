@@ -1,0 +1,8 @@
+# 42 Inception docker-compose configuration
+version: "3" #optional, can be changed depends
+services:
+  mariadb:
+  wordpress:
+  nginx:
+volumes:
+networks:
