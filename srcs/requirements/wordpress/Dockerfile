@@ -1,0 +1,7 @@
+#MariaDB Wordpress
+FROM
+RUN
+COPY
+EXPOSE
+ENTRYPOINT
+CMD
