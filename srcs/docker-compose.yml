@@ -2,7 +2,19 @@
 version: "3" #optional, can be changed depends
 services:
   mariadb:
+    build:
+    ports:
+    networks:
+    restart: "on-failure"
   wordpress:
+    build:
+    ports:
+    networks:
+    restart: "on-failure"
   nginx:
+    build:
+    ports:
+    networks:
+    restart: "on-failure"
 volumes:
 networks:
