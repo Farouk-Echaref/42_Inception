@@ -3,7 +3,17 @@ version: "3.7" #optional, can be changed depends
 
 volumes:
   mariadb:
+    driver: local
+    driver_opts:
+      device: /home/fech-cha/data
+      o: bind
+      type: none
   wordpress:
+    driver: local
+    driver_opts:
+      device: /home/fech-cha/data
+      o: bind
+      type: none
   
 networks:
   inception:
@@ -16,7 +26,7 @@ services:
     networks:
       - inception
     volumes:
-      - "/home/fech-cha/data:/var/lib/mysql"
+      - "mariadb:/var/lib/mysql"
     restart: "on-failure"
     container_name: "mariadb"
   wordpress:
@@ -25,7 +35,7 @@ services:
     networks:
       - inception
     volumes:
-      - "/home/fech-cha/data:/var/www/html"
+      - "wordpress:/var/www/html"
     restart: "on-failure"
     depends_on:
       - mariadb
@@ -35,6 +45,8 @@ services:
     ports:
     networks:
       - inception
+    volumes:
+      - "wordpress:/var/www/html"
     restart: "on-failure"
     depends_on:
       - wordpress
