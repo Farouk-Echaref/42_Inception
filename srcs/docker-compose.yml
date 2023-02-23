@@ -21,7 +21,7 @@ networks:
 
 services:
   mariadb:
-    build:
+    build: ./requirements/mariadb
     ports:
     networks:
       - inception
@@ -30,7 +30,7 @@ services:
     restart: "on-failure"
     container_name: "mariadb"
   wordpress:
-    build:
+    build: ./requirements/wordpress
     ports:
     networks:
       - inception
@@ -41,7 +41,7 @@ services:
       - mariadb
     container_name: "wordpress"
   nginx:
-    build:
+    build: ./requirements/nginx
     ports:
     networks:
       - inception
