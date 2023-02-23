@@ -5,12 +5,14 @@ services:
     build:
     ports:
     networks:
+      - inception
     volumes:
     restart: "on-failure"
   wordpress:
     build:
     ports:
     networks:
+      - inception
     volumes:
     restart: "on-failure"
     depends_on:
@@ -19,8 +21,11 @@ services:
     build:
     ports:
     networks:
+      - inception
     restart: "on-failure"
     depends_on:
       - wordpress
 volumes:
 networks:
+  inception:
+    name: inception
