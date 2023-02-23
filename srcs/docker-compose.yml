@@ -1,7 +1,10 @@
 # 42 Inception docker-compose configuration
-version: "3.5" #optional, can be changed depends
+version: "3.7" #optional, can be changed depends
 
 volumes:
+  mariadb:
+  wordpress:
+  
 networks:
   inception:
     name: inception
@@ -13,6 +16,7 @@ services:
     networks:
       - inception
     volumes:
+      - "/home/fech-cha/data:/var/lib/mysql"
     restart: "on-failure"
     container_name: "mariadb"
   wordpress:
@@ -21,6 +25,7 @@ services:
     networks:
       - inception
     volumes:
+      - "/home/fech-cha/data:/var/www/html"
     restart: "on-failure"
     depends_on:
       - mariadb
