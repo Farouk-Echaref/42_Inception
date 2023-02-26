@@ -10,7 +10,7 @@ MariaDB -> Wordpress -> Nginx
 # Stacks knowledge
 # #nginx (web-server: get a request => send response)
       (Gateway)
-*internet <=> Back-end infrastructure 
+internet <=> Back-end infrastructure 
 *event driven architecture
 *Reverse proxy: Distribute the load to multiple back-end servers (+security, caching, SSL(TLS) encryption)
 *using Linux server (conf file in /etc)
