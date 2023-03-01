@@ -23,4 +23,4 @@ MariaDB -> Wordpress -> Nginx
 
 # maridadb (database: with SQL)
 
--Create User, set Password, grant privileges to user, flush privileges
+-Create database, Password root, Create User, set Password, grant privileges to user, flush privileges

@@ -24,6 +24,8 @@ services:
     build: ./requirements/mariadb
     image: mariadb #test tag :inception or :latest
     # ports: don't need to map those containers
+    ports:
+      - 3306
     networks:
       - inception
     volumes:
@@ -33,7 +35,8 @@ services:
   wordpress:
     build: ./requirements/wordpress
     image: wordpress
-    # ports:
+    ports:
+      - 9000
     networks:
       - inception
     volumes:
