@@ -21,4 +21,6 @@ MariaDB -> Wordpress -> Nginx
 *include SSL configuration 
 
 
-# maridadb (database: )
+# maridadb (database: with SQL)
+
+-Create User, set Password, grant privileges to user, flush privileges
