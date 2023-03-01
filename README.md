@@ -20,3 +20,5 @@ MariaDB -> Wordpress -> Nginx
 *directive of "Location" of where to find the raw files 
 *include SSL configuration 
 
+
+# maridadb (database: )
