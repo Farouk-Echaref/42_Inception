@@ -1,7 +1,7 @@
 #MariaDB Dockerfile
 #use a requirements.txt file in RUN
 
-FROM alpine:3.15
+FROM debian:bullseye
 
 RUN  apt-get update -y && apt-get install mariadb-server -y
 
