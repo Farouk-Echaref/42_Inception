@@ -9,4 +9,8 @@ EXPOSE 3306
         
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 
-CMD ["./tools/mariadbScript.sh"]
+COPY ./tools/mariadbScript.sh .
+
+RUN chmod +x ./mariadbScript.sh
+
+CMD ["./mariadbScript.sh"]
