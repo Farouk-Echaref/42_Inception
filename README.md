@@ -8,6 +8,11 @@ A docker platform inside a virtual machine inside my computer
 ## docker-compose
 - need to set a network ip range
 
+-concerning mariadb bind-address:
+"If you want other containers (such as a WordPress or NGINX container) to be able to connect to the MariaDB container, you will need to set bind-address to the IP address of the Docker network interface that the containers are connected to. Typically, this will be the IP address of the Docker network gateway, which is usually 172.17.0.1 by default.
+
+So, if you want to allow connections from other containers on the Docker network, you would need to set the bind-address in 50-server.cnf to 172.17.0.1 (or the IP address of your Docker network gateway if it is different)."
+
 # Order:
 MariaDB -> Wordpress -> Nginx
 
