@@ -18,6 +18,10 @@ volumes:
 networks:
   inception:
     name: inception
+    driver: bridge
+    ipam:
+      config:
+        subnet: 
 
 services:
   mariadb:
