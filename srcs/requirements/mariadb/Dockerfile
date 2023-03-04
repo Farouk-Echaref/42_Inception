@@ -1,5 +1,4 @@
 #MariaDB Dockerfile
-#use a requirements.txt file in RUN
 
 FROM debian:bullseye
 

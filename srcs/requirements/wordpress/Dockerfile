@@ -1,7 +1,7 @@
 #MariaDB Wordpress
-FROM
-RUN
+
+FROM debian:bullseye
+
+RUN 
 COPY
-EXPOSE
-ENTRYPOINT
 CMD
