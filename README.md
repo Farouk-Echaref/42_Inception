@@ -11,7 +11,8 @@ A docker platform inside a virtual machine inside my computer
 -concerning mariadb bind-address:
 "If you want other containers (such as a WordPress or NGINX container) to be able to connect to the MariaDB container, you will need to set bind-address to the IP address of the Docker network interface that the containers are connected to. Typically, this will be the IP address of the Docker network gateway, which is usually 172.17.0.1 by default.
 
-So, if you want to allow connections from other containers on the Docker network, you would need to set the bind-address in 50-server.cnf to 172.17.0.1 (or the IP address of your Docker network gateway if it is different)."
+So, if you want to allow connections from other containers on the Docker network, you would need to set the bind-address in 50-server.cnf to 172.17.0.1 (or the IP address of your Docker network gateway if it is different).
+-The localhost parameter in the CREATE USER instruction specifies the hostname or IP address that the user can connect from, but when running MariaDB inside a Docker container, this is typically set to localhost or 127.0.0.1 because the user will be connecting from inside the same container as the MariaDB server. However, if you want to allow users from other containers to connect to MariaDB, you would need to create a user with a hostname or IP address that matches the IP address of the Docker network interface that the other containers are connected to."
 
 # Order:
 MariaDB -> Wordpress -> Nginx
