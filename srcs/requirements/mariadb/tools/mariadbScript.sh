@@ -13,7 +13,6 @@ y
 y
 y
 y
-y
 EOF
 
 #create database, user and password, grant privileges, flush privileges
