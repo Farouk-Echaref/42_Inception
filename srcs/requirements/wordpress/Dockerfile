@@ -9,5 +9,10 @@ RUN apt-get update && \
     apt-get install -y nginx openssl && \
     rm -rf /var/lib/apt/lists/*
 
-COPY
-CMD
+COPY ./conf/nginx.conf /etc/nginx
+
+COPY ./tools/nginxScript.sh .
+
+RUN chmod +x ./nginxScript.sh
+
+CMD ["./nginxScript.sh"]
