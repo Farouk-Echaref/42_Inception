@@ -11,10 +11,10 @@ RUN apt-get update && \
 
 EXPOSE 443
 
-COPY ./conf/default.conf /etc/nginx/conf.d
-
 COPY ./tools/nginxScript.sh .
 
 RUN chmod +x ./nginxScript.sh
+
+COPY ./conf/default.conf /etc/nginx/conf.d
 
 CMD ["./nginxScript.sh"]
