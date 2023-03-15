@@ -8,4 +8,10 @@
     openssl req -new -x509 -sha256 -key /etc/nginx/eckey.pem -out /etc/nginx/eccert.pem -days 365 -subj "/C=MA/ST=None/L=Khouribga/O=42Network/OU=1337Kh/CN=fech-cha.42.fr"
 
 
+addgroup -g 82 -S www-data 
+adduser -u 82 -D -S -G www-data www-data
+
+chown -R www-data:www-data /var/www/html
+chmod -R 0755 /var/www/html
+
 nginx -g "daemon off;"
