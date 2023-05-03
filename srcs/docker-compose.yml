@@ -80,8 +80,15 @@ services:
       - mariadb
     container_name: "adminer"
   ftp:
+    build: ./requirements/bonus/ftp
+    image: ftp
+    ports:
+    networks:
+      inception:
+        ipv4_address: 198.168.1.6
+    restart: "on-failure"
   redis:
   website:
-  extra:
+  cadvisor:
 
 
