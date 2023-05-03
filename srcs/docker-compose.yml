@@ -29,7 +29,7 @@ services:
     image: mariadb #test tag :inception or :latest
     # ports: don't need to map those containers
     ports:
-      - 3306
+      - "3306:3306"
     networks:
       inception:
         ipv4_address: 198.168.1.2
@@ -41,7 +41,7 @@ services:
     build: ./requirements/wordpress
     image: wordpress
     ports:
-      - 9000
+      - "9000:9000"
     networks:
       inception:
         ipv4_address: 198.168.1.3
@@ -68,7 +68,8 @@ services:
   adminer:
     build: ./requirements/bonus/adminer
     image: adminer
-    ports: 
+    ports:
+      - "1304:1304"
     networks:
       inception:
         ipv4_address: 198.168.1.5
