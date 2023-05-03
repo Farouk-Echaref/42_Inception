@@ -14,12 +14,6 @@ volumes:
       device: /home/fech-cha/data/wordpress
       o: bind
       type: none
-  ftp:
-    driver: local
-    driver_opts:
-      device: /home/fech-cha/data/ftp
-      o: bind
-      type: none
 
   
 networks:
@@ -105,7 +99,7 @@ services:
       inception:
         ipv4_address: 198.168.1.6
     volumes:  
-      - "ftp:/home/"
+      - "wordpress:/var/www/html"
     restart: "on-failure"
   redis:
   website:
