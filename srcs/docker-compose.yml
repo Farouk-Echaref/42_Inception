@@ -65,5 +65,22 @@ services:
     depends_on:
       - wordpress
     container_name: "nginx"
+  adminer:
+    build: ./requirements/bonus/adminer
+    image: adminer
+    ports: 
+    networks:
+      inception:
+        ipv4_address: 198.168.1.5
+    volumes:
+      - "mariadb:/var/lib/mysql"
+    restart: "on-failure"
+    depends_on:
+      - mariadb
+    container_name: "adminer"
+  ftp:
+  redis:
+  website:
+  extra:
 
 
