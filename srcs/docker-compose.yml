@@ -102,7 +102,11 @@ services:
       - "wordpress:/var/www/html"
     restart: "on-failure"
   redis:
-  website:
+  portfolio:
+    env_file:
+      - .env
+    build: ./requirements/bonus/website
+    image: portfolio
   cadvisor:
 
 
