@@ -107,6 +107,12 @@ services:
       - .env
     build: ./requirements/bonus/portfolio
     image: portfolio
+    ports:
+      - "5000:5000"
+    networks:
+      inception:
+        ipv4_address: 198.168.1.7
+    restart: "on-failure"
   cadvisor:
 
 
