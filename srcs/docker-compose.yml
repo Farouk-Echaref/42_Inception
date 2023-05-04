@@ -101,7 +101,6 @@ services:
     volumes:  
       - "wordpress:/var/www/html"
     restart: "on-failure"
-  redis:
   portfolio:
     env_file:
       - .env
@@ -113,6 +112,7 @@ services:
       inception:
         ipv4_address: 198.168.1.7
     restart: "on-failure"
-  cadvisor:
+  # redis:
+  # cadvisor:
 
 
