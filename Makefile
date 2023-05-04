@@ -17,5 +17,8 @@ start:
 stop:
 	$(DOCKER_COMPOSE) -f ./srcs/docker-compose.yml stop
 
+status:
+	@docker ps
+
 logs:
 	$(DOCKER_COMPOSE) logs -f $(CONTAINER_NAME)
