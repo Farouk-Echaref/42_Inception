@@ -25,7 +25,9 @@ FLUSH PRIVILEGES;
 EOF
 
 #start the mariaDB server
-/usr/bin/mysqld_safe
+# /usr/bin/mysqld_safe
+
+systemctl start mariadb.service
 
 
 

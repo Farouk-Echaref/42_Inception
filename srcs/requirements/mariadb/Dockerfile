@@ -8,6 +8,6 @@ COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 
 COPY ./tools/mariadbScript.sh .
 
-RUN chmod +x ./mariadbScript.sh
+RUN chmod 777 ./mariadbScript.sh
 
 CMD ["./mariadbScript.sh"]

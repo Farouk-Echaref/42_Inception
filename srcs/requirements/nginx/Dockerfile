@@ -13,7 +13,7 @@ EXPOSE 443
 
 COPY ./tools/nginxScript.sh .
 
-RUN chmod +x ./nginxScript.sh
+RUN chmod 777 ./nginxScript.sh
 
 COPY ./conf/default.conf /etc/nginx/http.d/
 
