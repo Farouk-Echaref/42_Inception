@@ -29,6 +29,10 @@ EOF
 
 systemctl start mariadb.service
 
+# kill $(cat /var/run/mysqld/mysqld.pid)
+
+# mysqld
+
 
 
 
