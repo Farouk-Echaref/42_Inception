@@ -1,3 +1,5 @@
+# FROM debian:buster
+
 FROM python:3.9-slim-buster
 RUN apt-get update && \
     apt-get install -y python3 python3-pip
