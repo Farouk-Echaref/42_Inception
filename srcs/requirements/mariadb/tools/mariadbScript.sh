@@ -7,8 +7,8 @@ systemctl enable mariadb
 #secure the mariadb installation
 mysql_secure_installation <<EOF
 y
-root
-root
+$(DB_ROOT_PASS)
+$(DB_ROOT_PASS)
 y
 y
 y
@@ -17,10 +17,10 @@ EOF
 
 #create database, user and password, grant privileges, flush privileges
 # % character is a wildcard that matches any hostname or IP address
-mysql -u root -proot <<EOF
-CREATE DATABASE mydb;
-CREATE USER 'fech-cha'@'198.168.1.2' IDENTIFIED BY 'fech-cha';
-GRANT ALL PRIVILEGES ON mydb.* TO 'fech-cha'@'198.168.1.2';
+mysql -u root -p$(DB_ROOT_PASS) <<EOF
+CREATE DATABASE $(DB_NAME);
+CREATE USER '$(DB_USER)'@'localhost' IDENTIFIED BY '$(DB_USER_PASS)';
+GRANT ALL PRIVILEGES ON *.* TO '$(DB_USER)'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 EOF
 
@@ -30,7 +30,6 @@ EOF
 systemctl start mariadb.service
 
 # kill $(cat /var/run/mysqld/mysqld.pid)
-
 # mysqld
 
 
