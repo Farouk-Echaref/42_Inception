@@ -78,7 +78,7 @@ services:
     build: ./requirements/bonus/adminer
     image: adminer
     ports:
-      - "1304:1304"
+      - "1234:1234"
     networks:
       inception:
         ipv4_address: 198.168.1.5
