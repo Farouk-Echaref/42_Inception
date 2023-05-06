@@ -2,6 +2,8 @@ FROM debian:buster
 
 RUN apt-get update -y & apt install vsftpd -y
 
-COPY ./tools/ftpScript.sh /
+COPY ./tools/sftpScript.sh .
 
-CMD ["./ftpScript.sh"]
+EXPOSE 21 22
+
+CMD ["./sftpScript.sh"]
