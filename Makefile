@@ -1,7 +1,6 @@
 DOCKER_COMPOSE := docker compose
-CONTAINER_NAME := my_container
 
-.PHONY: up down start stop status
+.PHONY: up down start stop status fclean
 
 all : up
 
@@ -23,5 +22,5 @@ status:
 logs:
 	$(DOCKER_COMPOSE) logs -f $(CONTAINER_NAME)
 
-
-#add clean to clean docker containers and images
+fclean:
+	$(sh ./DockerCleaner.sh)
