@@ -36,11 +36,11 @@
 addgroup mysql mysql
 
 # Create the "/var/run/mysqld" directory
-mkdir -p /var/run/mysqld
-chmod 777 /var/run/mysqld
+mkdir -p /run/mysqld
+chmod 777 /run/mysqld
 
 # Set the ownership of "/var/run/mysqld" to the "mysql" user and group
-chown -R mysql:mysql /var/run/mysqld
+chown -R mysql:mysql /run/mysqld
 
 # Set the ownership of "/var/lib/mysql" to the "mysql" user and group
 chown -R mysql:mysql /var/lib/mysql

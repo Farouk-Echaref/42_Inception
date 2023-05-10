@@ -85,55 +85,68 @@ services:
     container_name: "nginx"
 
   #Adminer section
-  adminer:
-    env_file:
-      - .env
-    build: ./requirements/bonus/adminer
-    image: adminer
-    ports:
-      - "1234:1234"
-    networks:
-      inception:
-        ipv4_address: 198.168.1.5
-    volumes:
-      - "mariadb:/var/lib/mysql"
-    restart: "on-failure"
-    depends_on:
-      - mariadb
-    container_name: "adminer"
+  # adminer:
+  #   env_file:
+  #     - .env
+  #   build: ./requirements/bonus/adminer
+  #   image: adminer
+  #   ports:
+  #     - "1234:1234"
+  #   networks:
+  #     inception:
+  #       ipv4_address: 198.168.1.5
+  #   volumes:
+  #     - "mariadb:/var/lib/mysql"
+  #   restart: "on-failure"
+  #   depends_on:
+  #     - mariadb
+  #   container_name: "adminer"
 
   #SVFTP section
-  sftp:
-    env_file:
-      - .env
-    build: ./requirements/bonus/sftp
-    image: sftp
-    ports:
-      - "21:21"
-      - "22:22"
-    networks:
-      inception:
-        ipv4_address: 198.168.1.6
-    volumes:  
-      - "wordpress:/var/www/html"
-    restart: "on-failure"
-    container_name: "sftp"
+  # sftp:
+  #   env_file:
+  #     - .env
+  #   build: ./requirements/bonus/sftp
+  #   image: sftp
+  #   ports:
+  #     - "21:21"
+  #     - "22:22"
+  #   networks:
+  #     inception:
+  #       ipv4_address: 198.168.1.6
+  #   volumes:  
+  #     - "wordpress:/var/www/html"
+  #   restart: "on-failure"
+  #   container_name: "sftp"
 
   #Portfolio (static website)
-  portfolio:
-    env_file:
-      - .env
-    build: ./requirements/bonus/portfolio
-    image: portfolio
-    ports:
-      - "5000:5000"
-    networks:
-      inception:
-        ipv4_address: 198.168.1.7
-    restart: "on-failure"
+  # portfolio:
+  #   env_file:
+  #     - .env
+  #   build: ./requirements/bonus/portfolio
+  #   image: portfolio
+  #   ports:
+  #     - "5000:5000"
+  #   networks:
+  #     inception:
+  #       ipv4_address: 198.168.1.7
+  #   restart: "on-failure"
+  #   container_name: "portfolio"
 
-    
-  # redis:
+  #Cadvisor section
   # cadvisor:
+  #   env_file:
+  #     - .env
+  #   build: ./requirements/bonus/cadvisor
+  #   image: cadvisor
+  #   ports:
+  #     - "4000:4000"
+  #   networks:
+  #     inception:
+  #       ipv4_address: 198.168.1.8
+  #   restart: "on-failure"
+  #   container_name: "cadvisor"
+
+  # redis:
 
 
