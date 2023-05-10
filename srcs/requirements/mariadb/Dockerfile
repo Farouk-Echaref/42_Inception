@@ -4,7 +4,7 @@
 
 FROM debian:buster
 
-RUN  apt-get update -y && apt-get install mariadb mariadb-client -y        
+apt update && apt install -y mariadb-server     
 
 COPY ./tools/mariadbScript.sh .
 
