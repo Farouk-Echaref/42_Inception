@@ -1,10 +1,12 @@
 DOCKER_COMPOSE := docker compose
 
-.PHONY: up down start stop status fclean
 
 all : up
 
 up:
+	mkdir -p /home/fech-cha/data/mariadb
+	mkdir -p /home/fech-cha/data/wordpress
+
 	$(DOCKER_COMPOSE) -f ./srcs/docker-compose.yml up -d
 
 down:
@@ -22,5 +24,12 @@ status:
 logs:
 	$(DOCKER_COMPOSE) logs -f $(CONTAINER_NAME)
 
-fclean:
-	$(sh ./DockerCleaner.sh)
+fclean: 
+	docker stop $(docker ps -q)
+	docker rm $(docker ps -qa)
+	docker network prune -f
+	docker image prune -f
+	rm -rf /home/fech-cha/data/mariadb/*
+	rm -rf /home/fech-cha/data/wordpress/*
+
+.PHONY: up down start stop status fclean
