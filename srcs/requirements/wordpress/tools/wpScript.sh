@@ -4,7 +4,7 @@
 wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
 #You need to make this .phar file executable and move it to /usr/local/bin so that it can be run directly:
-chmod 755 wp-cli.phar
+chmod 777 wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 
 #WP-CLI includes a command to download WordPress
@@ -16,15 +16,5 @@ chmod 777 /var/www/html/wp-config.php
 
 #install WordPress now, we need to run one last command, while configuring WP-CLI credentials
 wp --allow-root core install --url=$DOMAIN --title=$WP_TITLE --admin_user=$WP_USER --admin_password=$WP_PASS --admin_email=$WP_EMAIL
-
-#redis
-# wp --allow-root plugin install redis-cache --activate
-
-# sed -i "40i define( 'WP_REDIS_HOST', 'redis' );"			/var/www/html/wp-config.php
-# sed -i "42i define( 'WP_REDIS_PASSWORD', '$REDISPASS' );"	/var/www/html/wp-config.php
-
-# wp --allow-root redis enable
-
-# chown -R www-data:www-data /var/www/html/
 
 php-fpm7.3  -F 

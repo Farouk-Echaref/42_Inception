@@ -3,7 +3,7 @@
 # FROM debian:bullseye
 FROM debian:buster
 
-WORKDIR /var/www/html
+WORKDIR /var/www/html/wordpress
 
 RUN apt update & apt install -y php7.3 php-mysqli mariadb-client php-fpm wget
 
