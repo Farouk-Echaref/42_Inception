@@ -1,6 +1,7 @@
 # 42 Inception docker-compose configuration
 version: "3.7" #optional, can be changed depends
 
+#Volumes section
 volumes:
   mariadb:
     driver: local
@@ -15,7 +16,7 @@ volumes:
       o: bind
       type: none
 
-  
+#Networks section
 networks:
   inception:
     name: inception
@@ -24,7 +25,10 @@ networks:
       config:
         - subnet: 192.168.0.0/16
 
+#Containers section
 services:
+
+  #Mariadb section
   mariadb:
     env_file:
       - .env
@@ -40,6 +44,8 @@ services:
       - "mariadb:/var/lib/mysql"
     restart: "on-failure"
     container_name: "mariadb"
+
+  #Wordpress section
   wordpress:
     env_file:
       - .env
@@ -51,11 +57,13 @@ services:
       inception:
         ipv4_address: 198.168.1.3
     volumes:
-      - "wordpress:/var/www/html"
+      - "wordpress:/var/www/html/wordpress"
     restart: "on-failure"
     depends_on:
       - mariadb
     container_name: "wordpress"
+
+  #Nginx Section
   nginx:
     env_file:
       - .env
@@ -67,11 +75,16 @@ services:
       inception:
        ipv4_address: 198.168.1.4
     volumes:
-      - "wordpress:/var/www/html"
+      - "wordpress:/var/www/html/wordpress"
     restart: "on-failure"
     depends_on:
       - wordpress
+      - portfolio
+      - cadvisor
+      - adminer
     container_name: "nginx"
+
+  #Adminer section
   adminer:
     env_file:
       - .env
@@ -88,6 +101,8 @@ services:
     depends_on:
       - mariadb
     container_name: "adminer"
+
+  #SVFTP section
   sftp:
     env_file:
       - .env
@@ -95,6 +110,7 @@ services:
     image: sftp
     ports:
       - "21:21"
+      - "22:22"
     networks:
       inception:
         ipv4_address: 198.168.1.6
@@ -102,6 +118,8 @@ services:
       - "wordpress:/var/www/html"
     restart: "on-failure"
     container_name: "sftp"
+
+  #Portfolio (static website)
   portfolio:
     env_file:
       - .env
@@ -113,6 +131,8 @@ services:
       inception:
         ipv4_address: 198.168.1.7
     restart: "on-failure"
+
+    
   # redis:
   # cadvisor:
 

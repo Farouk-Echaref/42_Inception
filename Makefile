@@ -22,3 +22,6 @@ status:
 
 logs:
 	$(DOCKER_COMPOSE) logs -f $(CONTAINER_NAME)
+
+
+#add clean to clean docker containers and images
