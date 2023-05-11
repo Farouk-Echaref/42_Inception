@@ -120,21 +120,26 @@ services:
     container_name: "adminer"
 
   #SVFTP section
-  # sftp:
-  #   env_file:
-  #     - .env
-  #   build: ./requirements/bonus/sftp
-  #   image: sftp
-  #   ports:
-  #     - "21:21"
-  #     - "22:22"
-  #   networks:
-  #     inception:
-  #       ipv4_address: 198.168.1.6
-  #   volumes:  
-  #     - "wordpress:/var/www/html"
-  #   restart: "on-failure"
-  #   container_name: "sftp"
+  sftp:
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: requirements/bonus/sftp/Dockerfile
+      args:
+        FTP_USER: ${FTP_USER}
+        FTP_PASSWD: ${FTP_PASSWD}
+    image: sftp
+    ports:
+      - "21:21"
+      - "22:22"
+    networks:
+      inception:
+        ipv4_address: 198.168.0.6
+    volumes:  
+      - "wordpress:/var/www/html"
+    restart: "on-failure"
+    container_name: "sftp"
 
   #Portfolio (static website)
   # portfolio:
@@ -146,7 +151,7 @@ services:
   #     - "5000:5000"
   #   networks:
   #     inception:
-  #       ipv4_address: 198.168.1.7
+  #       ipv4_address: 198.168.0.7
   #   restart: "on-failure"
   #   container_name: "portfolio"
 
@@ -160,7 +165,7 @@ services:
   #     - "4000:4000"
   #   networks:
   #     inception:
-  #       ipv4_address: 198.168.1.8
+  #       ipv4_address: 198.168.0.8
   #   restart: "on-failure"
   #   container_name: "cadvisor"
 

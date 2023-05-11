@@ -1,5 +1,8 @@
 FROM debian:buster
 
+ARG FTP_USER \
+    FTP_PASSWD
+
 WORKDIR /var/www
 
 RUN apt-get update -y & apt install vsftpd -y
