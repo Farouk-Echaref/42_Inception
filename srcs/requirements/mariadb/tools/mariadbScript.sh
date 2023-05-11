@@ -1,17 +1,28 @@
 #!/bin/sh
 
-sed -i 's/127.0.0.1/0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
+# chmod -R 777 /var/run/mysqld
+# systemctl restart mysql
 
+#!/bin/bash
+
+# Set the root password for MySQL/MariaDB
+echo "mariadb-server mysql-server/root_password password root" | debconf-set-selections
+echo "mariadb-server mysql-server/root_password_again password root" | debconf-set-selections
+
+# Start the MySQL service
 service mysql start
 
-mysql -u root -p"$DB_ROOT_PASS" -e "CREATE DATABASE IF NOT EXISTS $DB_NAME";
-mysql -u root -p"$DB_ROOT_PASS" -e "CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_USER_PASS'" ;
-mysql -u root -p"$DB_ROOT_PASS" -e "GRANT ALL PRIVILEGES ON *.* TO '$DB_USER'@'%';" ;
-mysql -u root -p"$DB_ROOT_PASS" -e "FLUSH PRIVILEGES;"
+# Create a new database and user with all privileges
+mysql -u root -proot -e "CREATE DATABASE IF NOT EXISTS wordpress;"
+mysql -u root -proot -e "CREATE USER IF NOT EXISTS 'fech-cha'@'%' IDENTIFIED BY 'user';"
+mysql -u root -proot -e "GRANT ALL PRIVILEGES ON *.* TO 'fech-cha'@'%';"
+mysql -u root -proot -e "FLUSH PRIVILEGES;"
 
-kill `cat /var/run/mysqld/mysqld.pid`
+# Shutdown the MySQL service
+mysqladmin -u root -proot shutdown
 
-mysqld
+# Start the MySQL service again
+service mysql start
 
 #start the service of mariadb
 # systemctl start mariadb
@@ -86,8 +97,6 @@ mysqld
 # rm -rf temp
 
 # mysqld --user=mysql --console --skip-networking=0
-
-#!/bin/bash
 
 
 
