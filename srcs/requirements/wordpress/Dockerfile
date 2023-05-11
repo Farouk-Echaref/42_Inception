@@ -3,6 +3,13 @@
 # FROM debian:bullseye
 FROM debian:buster
 
+ARG WP_USER \
+    WP_PASS \
+    WP_EMAIL \
+    WP_TITLE \
+    DB_HOST \
+    DB_NAME
+
 WORKDIR /var/www/html/wordpress
 
 RUN chmod -R 777 /var/www/html
