@@ -27,6 +27,7 @@ logs:
 fclean: 
 	docker stop $(docker ps -q)
 	docker rm $(docker ps -qa)
+	docker system prune -f  -a --volumes
 	docker network prune -f
 	docker image prune -f
 	rm -rf /home/fech-cha/data/mariadb/*

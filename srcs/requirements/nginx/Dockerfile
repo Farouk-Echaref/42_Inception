@@ -11,6 +11,10 @@ RUN apt-get update && \
     apt-get install -y nginx openssl && \
     rm -rf /var/lib/apt/lists/*
 
+RUN mkdir -p /etc/ssl/private
+
+RUN chmod 777 /etc/ssl/private
+
 EXPOSE 443
 
 COPY ./tools/nginxScript.sh .

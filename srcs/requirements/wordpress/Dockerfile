@@ -5,9 +5,11 @@ FROM debian:buster
 
 WORKDIR /var/www/html/wordpress
 
-RUN apt update & apt install -y php7.3 php-mysqli mariadb-client php-fpm wget
+RUN chmod -R 777 /var/www/html
 
-#Set ownership and permissions for wordpress files
+RUN mkdir /run/php/
+
+RUN apt update & apt install -y php7.3 php-mysqli mariadb-client php-fpm wget
 
 COPY ./tools/wpScript.sh .
 
