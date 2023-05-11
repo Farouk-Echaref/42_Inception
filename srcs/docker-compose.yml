@@ -50,7 +50,7 @@ services:
         ipv4_address: 198.168.0.2
     volumes:
       - "mariadb:/var/lib/mysql"
-    restart: "always"
+    restart: "on-failure"
     container_name: "mariadb"
 
   #Wordpress section
@@ -75,7 +75,7 @@ services:
         ipv4_address: 198.168.0.3
     volumes:
       - "wordpress:/var/www/html/wordpress"
-    restart: "always"
+    restart: "on-failure"
     depends_on:
       - mariadb
     container_name: "wordpress"
@@ -93,7 +93,7 @@ services:
        ipv4_address: 198.168.0.4
     volumes:
       - "wordpress:/var/www/html/wordpress"
-    restart: "always"
+    restart: "on-failure"
     depends_on:
       - wordpress
       # - portfolio
@@ -102,22 +102,22 @@ services:
     container_name: "nginx"
 
   #Adminer section
-  # adminer:
-  #   env_file:
-  #     - .env
-  #   build: ./requirements/bonus/adminer
-  #   image: adminer
-  #   ports:
-  #     - "1234:1234"
-  #   networks:
-  #     inception:
-  #       ipv4_address: 198.168.1.5
-  #   volumes:
-  #     - "mariadb:/var/lib/mysql"
-  #   restart: "always"
-  #   depends_on:
-  #     - mariadb
-  #   container_name: "adminer"
+  adminer:
+    env_file:
+      - .env
+    build: ./requirements/bonus/adminer
+    image: adminer
+    ports:
+      - "1234:1234"
+    networks:
+      inception:
+        ipv4_address: 198.168.0.5
+    volumes:
+      - "mariadb:/var/lib/mysql"
+    restart: "on-failure"
+    depends_on:
+      - mariadb
+    container_name: "adminer"
 
   #SVFTP section
   # sftp:
@@ -133,7 +133,7 @@ services:
   #       ipv4_address: 198.168.1.6
   #   volumes:  
   #     - "wordpress:/var/www/html"
-  #   restart: "always"
+  #   restart: "on-failure"
   #   container_name: "sftp"
 
   #Portfolio (static website)
@@ -147,7 +147,7 @@ services:
   #   networks:
   #     inception:
   #       ipv4_address: 198.168.1.7
-  #   restart: "always"
+  #   restart: "on-failure"
   #   container_name: "portfolio"
 
   #Cadvisor section
@@ -161,7 +161,7 @@ services:
   #   networks:
   #     inception:
   #       ipv4_address: 198.168.1.8
-  #   restart: "always"
+  #   restart: "on-failure"
   #   container_name: "cadvisor"
 
   # redis:
