@@ -34,8 +34,7 @@ services:
     env_file:
       - .env
     build:
-      context: .
-      dockerfile: requirements/mariadb/Dockerfile
+      context: ./requirements/mariadb
       args:
         DB_NAME: ${DB_NAME}
         DB_USER: ${DB_USER}
@@ -58,8 +57,7 @@ services:
     env_file:
       - .env
     build: 
-      context: .
-      dockerfile: requirements/wordpress/Dockerfile
+      context: ./requirements/wordpress
       args:
         DB_NAME: ${DB_NAME}
         DB_HOST: ${DB_HOST}
@@ -74,7 +72,7 @@ services:
       inception:
         ipv4_address: 198.168.0.3
     volumes:
-      - "wordpress:/var/www/html/wordpress"
+      - "wordpress:/var/www/html/"
     restart: "on-failure"
     depends_on:
       - mariadb
@@ -92,7 +90,7 @@ services:
       inception:
        ipv4_address: 198.168.0.4
     volumes:
-      - "wordpress:/var/www/html/wordpress"
+      - "wordpress:/var/www/html/"
     restart: "on-failure"
     depends_on:
       - wordpress
@@ -102,58 +100,60 @@ services:
     container_name: "nginx"
 
   #Adminer section
-  adminer:
-    env_file:
-      - .env
-    build: ./requirements/bonus/adminer
-    image: adminer
-    ports:
-      - "1234:1234"
-    networks:
-      inception:
-        ipv4_address: 198.168.0.5
-    volumes:
-      - "mariadb:/var/lib/mysql"
-    restart: "on-failure"
-    depends_on:
-      - mariadb
-    container_name: "adminer"
+  # adminer:
+  #   env_file:
+  #     - .env
+  #   build: ./requirements/bonus/adminer
+  #   image: adminer
+  #   ports:
+  #     - "1234:1234"
+  #   networks:
+  #     inception:
+  #       ipv4_address: 198.168.0.5
+  #   volumes:
+  #     - "mariadb:/var/lib/mysql"
+  #   restart: "on-failure"
+  #   depends_on:
+  #     - mariadb
+  #   container_name: "adminer"
 
   #SVFTP section
-  sftp:
-    env_file:
-      - .env
-    build:
-      context: .
-      dockerfile: requirements/bonus/sftp/Dockerfile
-      args:
-        FTP_USER: ${FTP_USER}
-        FTP_PASSWD: ${FTP_PASSWD}
-    image: sftp
-    ports:
-      - "21:21"
-      - "22:22"
-    networks:
-      inception:
-        ipv4_address: 198.168.0.6
-    volumes:  
-      - "wordpress:/var/www/html"
-    restart: "on-failure"
-    container_name: "sftp"
+  # sftp:
+  #   env_file:
+  #     - .env
+  #   build:
+  #     context: .
+  #     dockerfile: requirements/bonus/sftp/Dockerfile
+  #     args:
+  #       FTP_USER: ${FTP_USER}
+  #       FTP_PASSWD: ${FTP_PASSWD}
+  #   image: sftp
+  #   ports:
+  #     - "21:21"
+  #     - "22:22"
+  #   networks:
+  #     inception:
+  #       ipv4_address: 198.168.0.6
+  #   volumes:  
+  #     - "wordpress:/var/www/html"
+  #   restart: "on-failure"
+  #   depends_on:
+  #     - wordpress
+  #   container_name: "sftp"
 
   #Portfolio (static website)
-  portfolio:
-    env_file:
-      - .env
-    build: ./requirements/bonus/portfolio
-    image: portfolio
-    ports:
-      - "5000:5000"
-    networks:
-      inception:
-        ipv4_address: 198.168.0.7
-    restart: "on-failure"
-    container_name: "portfolio"
+  # portfolio:
+  #   env_file:
+  #     - .env
+  #   build: ./requirements/bonus/portfolio
+  #   image: portfolio
+  #   ports:
+  #     - "5000:5000"
+  #   networks:
+  #     inception:
+  #       ipv4_address: 198.168.0.7
+  #   restart: "on-failure"
+  #   container_name: "portfolio"
 
   #Cadvisor section
   # cadvisor:
