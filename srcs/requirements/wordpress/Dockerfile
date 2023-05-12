@@ -10,20 +10,20 @@ ARG WP_USER \
     DB_HOST \
     DB_NAME
 
-WORKDIR /var/www/html/wordpress
+# RUN chmod -R 777 /var/www/html
 
-RUN chmod -R 777 /var/www/html
+RUN mkdir -p /run/php/
 
-RUN mkdir /run/php/
+RUN apt update
 
-RUN apt update & apt install -y php7.3 php-mysqli mariadb-client php-fpm wget
+RUN apt install -y php php-mysqli mariadb-client php7.3-fpm wget
 
-COPY ./tools/wpScript.sh .
+COPY ./tools/wp_script.sh .
 
-RUN 777 ./wpScript.sh
+RUN chmod 777 ./wp_script.sh
 
 COPY ./tools/www.conf /etc/php/7.3/fpm/pool.d
 
 EXPOSE 9000
 
-CMD ["./wpScript.sh"]
+CMD ["sh", "./wp_script.sh"]
