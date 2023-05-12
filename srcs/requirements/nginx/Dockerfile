@@ -13,7 +13,15 @@ RUN apt-get update && \
 
 RUN mkdir -p /etc/ssl/private
 
+RUN mkdir -p /etc/ssl/certs
+
+RUN mkdir -p /var/www/html
+
+RUN chmod 777 /var/www/html
+
 RUN chmod 777 /etc/ssl/private
+
+RUN chmod 777 /etc/ssl/certs
 
 EXPOSE 443
 
