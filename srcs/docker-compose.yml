@@ -40,6 +40,7 @@ services:
         DB_USER: ${DB_USER}
         DB_ROOT_PASS: ${DB_ROOT_PASS}
         DB_USER_PASS: ${DB_USER_PASS}
+        DB_HOST: ${DB_HOST}
     image: mariadb #test tag :inception or :latest
     # ports: don't need to map those containers
     ports:
@@ -49,7 +50,7 @@ services:
         ipv4_address: 198.168.0.2
     volumes:
       - "mariadb:/var/lib/mysql"
-    restart: "on-failure"
+    restart: "always"
     container_name: "mariadb"
 
   #Wordpress section
@@ -65,6 +66,9 @@ services:
         WP_EMAIL: ${WP_EMAIL}
         WP_PASS: ${WP_PASS}
         WP_USER: ${WP_USER}
+        USR: ${USR}
+        USER_EMAIL: ${USER_EMAIL}
+        USER_PASSWORD: ${USER_PASSWORD}
     image: wordpress
     ports:
       - "9000:9000"
@@ -73,10 +77,10 @@ services:
         ipv4_address: 198.168.0.3
     volumes:
       - "wordpress:/var/www/html/"
-    restart: "on-failure"
+    restart: "always"
     depends_on:
       - mariadb
-    container_name: "wordpress"
+    container_name: wordpress
 
   #Nginx Section
   nginx:
@@ -85,13 +89,14 @@ services:
     build: ./requirements/nginx
     image: nginx
     ports:
-      - "443:443"
+      # - "443:443"
+      - "80:80"
     networks:
       inception:
        ipv4_address: 198.168.0.4
     volumes:
       - "wordpress:/var/www/html/"
-    restart: "on-failure"
+    restart: "always"
     depends_on:
       - wordpress
       # - portfolio
@@ -112,7 +117,7 @@ services:
   #       ipv4_address: 198.168.0.5
   #   volumes:
   #     - "mariadb:/var/lib/mysql"
-  #   restart: "on-failure"
+  #   restart: "always"
   #   depends_on:
   #     - mariadb
   #   container_name: "adminer"
@@ -136,7 +141,7 @@ services:
   #       ipv4_address: 198.168.0.6
   #   volumes:  
   #     - "wordpress:/var/www/html"
-  #   restart: "on-failure"
+  #   restart: "always"
   #   depends_on:
   #     - wordpress
   #   container_name: "sftp"
@@ -152,7 +157,7 @@ services:
   #   networks:
   #     inception:
   #       ipv4_address: 198.168.0.7
-  #   restart: "on-failure"
+  #   restart: "always"
   #   container_name: "portfolio"
 
   #Cadvisor section
@@ -166,7 +171,7 @@ services:
   #   networks:
   #     inception:
   #       ipv4_address: 198.168.0.8
-  #   restart: "on-failure"
+  #   restart: "always"
   #   container_name: "cadvisor"
 
   # redis:
