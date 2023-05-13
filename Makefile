@@ -7,7 +7,7 @@ up:
 	mkdir -p /home/fech-cha/data/mariadb
 	mkdir -p /home/fech-cha/data/wordpress
 
-	$(DOCKER_COMPOSE) -f ./srcs/docker-compose.yml up -d
+	$(DOCKER_COMPOSE) -f ./srcs/docker-compose.yml up -d --build
 
 down:
 	$(DOCKER_COMPOSE) -f ./srcs/docker-compose.yml down
