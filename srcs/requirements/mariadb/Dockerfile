@@ -5,9 +5,16 @@ FROM alpine:3.16
 ARG DB_NAME \
     DB_USER \
     DB_ROOT_PASS \
-    DB_USER_PASS
+    DB_USER_PASS \  
+    DB_HOST
 
-RUN apk update && apk add --no-cache mariadb mariadb-client
+
+RUN addgroup -S mysql && adduser -S -G mysql mysql
+RUN apk update && apk add --no-cache mariadb mariadb-server-utils mariadb-client
+
+RUN mkdir -p /var/lib/mysql/ \
+	&& mkdir -p /run/mysqld \
+	&& chown mysql:mysql /var/lib/mysql
 
 RUN mkdir /var/run/mysqld; \
     chmod 777 /var/run/mysqld; \
@@ -25,8 +32,8 @@ EXPOSE 3306
 
 COPY ./conf/create_db.sh .
 
-RUN sh create_db.sh && rm create_db.sh
+# RUN sh create_db.sh 
 
-USER mysql
+# USER mysql
 
-CMD ["/usr/bin/mysqld", "--skip-log-error"]
+ENTRYPOINT ["./create_db.sh"]
