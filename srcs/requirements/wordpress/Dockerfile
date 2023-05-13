@@ -8,7 +8,10 @@ ARG WP_USER \
     WP_EMAIL \
     WP_TITLE \
     DB_HOST \
-    DB_NAME
+    DB_NAME \
+    USR \
+    USER_EMAIL \
+    USER_PASSWORD
 
 # RUN chmod -R 777 /var/www/html
 
