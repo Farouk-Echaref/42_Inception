@@ -5,11 +5,11 @@
 
 # FROM debian:bullseye
 
-FROM debian:buster
+FROM alpine:3.16
 
-RUN apt-get update && \
-    apt-get install -y nginx openssl && \
-    rm -rf /var/lib/apt/lists/*
+RUN apk update
+
+RUN apk add nginx
 
 RUN mkdir -p /etc/ssl/private
 
@@ -23,7 +23,9 @@ RUN chmod 777 /etc/ssl/private
 
 RUN chmod 777 /etc/ssl/certs
 
-EXPOSE 443
+RUN apk add openssl
+
+EXPOSE 80
 
 COPY ./tools/nginxScript.sh .
 
