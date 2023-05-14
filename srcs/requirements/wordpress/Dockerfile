@@ -25,7 +25,9 @@ COPY ./tools/wp_script.sh .
 
 RUN chmod 777 ./wp_script.sh
 
-COPY ./tools/www.conf /etc/php/7.3/fpm/pool.d
+COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d
+
+COPY ./conf/php.ini /etc/php/7.3/fpm
 
 EXPOSE 9000
 

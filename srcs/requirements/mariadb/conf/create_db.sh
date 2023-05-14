@@ -21,11 +21,6 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 
 fi
 
-SQL1="CREATE DATABASE IF NOT EXISTS ${DB_NAME};"
-SQL2="CREATE USER IF NOT EXISTS '${DB_USER}'@'${DB_HOST}' IDENTIFIED BY '${DB_USER_PASS}';"
-SQL3="GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'${DB_HOST}';"
-SQL4="FLUSH PRIVILEGES;"
-
 #check if wordpress DB laready exist,if not create new one
 # if [ ! -d "/var/lib/mysql/wordpress" ]; then
 
@@ -44,10 +39,13 @@ SQL4="FLUSH PRIVILEGES;"
 # FLUSH PRIVILEGES;
 # EOF
 
-echo "$SQL1" > /tmp/create_db.sql
-echo "$SQL2" >> /tmp/create_db.sql
-echo "$SQL3" >> /tmp/create_db.sql
-echo "$SQL4" >> /tmp/create_db.sql
+cat > /tmp/create_db.sql << EOF
+CREATE DATABASE IF NOT EXISTS wordpress;
+CREATE USER IF NOT EXISTS 'fech-cha'@'%' IDENTIFIED BY 'user';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'fech-cha'@'%' IDENTIFIED BY 'user';
+FLUSH PRIVILEGES;
+EOF
+
 
 mysql -u root < /tmp/create_db.sql
 wait $MY_SQL_PID
