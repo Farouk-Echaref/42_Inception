@@ -62,6 +62,7 @@ services:
       args:
         DB_NAME: ${DB_NAME}
         DB_HOST: ${DB_HOST}
+        DB_USER_PASS: $(DB_USER_PASS)
         WP_TITLE: ${WP_TITLE}
         WP_EMAIL: ${WP_EMAIL}
         WP_PASS: ${WP_PASS}
@@ -89,8 +90,8 @@ services:
     build: ./requirements/nginx
     image: nginx
     ports:
-      # - "443:443"
-      - "80:80"
+      - "443:443"
+      # - "80:80"
     networks:
       inception:
        ipv4_address: 198.168.0.4

@@ -25,7 +25,7 @@ RUN chmod 777 /etc/ssl/certs
 
 RUN apk add openssl
 
-EXPOSE 80
+EXPOSE 443
 
 COPY ./tools/nginxScript.sh .
 

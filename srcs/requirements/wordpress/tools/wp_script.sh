@@ -1,6 +1,5 @@
 #! /bin/sh
 
-
 if [ ! -f /var/www/html/wp-config.php ]; then
     #WP-CLI is available as a PHP Archive file (.phar). You can download it using either wget or curl commands:
     wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
@@ -27,7 +26,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
     chmod 777 /var/www/html/wp-config.php
 
     #install WordPress now, we need to run one last command, while configuring WP-CLI credentials
-    wp --allow-root core install --url=$DOMAIN --title=$WP_TITLE --admin_user=$WP_USER --admin_password=$WP_PASS --admin_email=$WP_EMAIL
+    wp core install --url=$DOMAIN --title=$WP_TITLE --admin_user=$WP_USER --admin_password=$WP_PASS --admin_email=$WP_EMAIL --allow-root
     wp user create $USR $USER_EMAIL --user_pass=$USER_PASSWORD --allow-root
 
 fi
