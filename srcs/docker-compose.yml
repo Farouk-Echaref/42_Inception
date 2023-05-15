@@ -147,18 +147,18 @@ services:
   #   container_name: "sftp"
 
   #Portfolio (static website)
-  # portfolio:
-  #   env_file:
-  #     - .env
-  #   build: ./requirements/bonus/portfolio
-  #   image: portfolio
-  #   ports:
-  #     - "5000:5000"
-  #   networks:
-  #     inception:
-  #       ipv4_address: 198.168.0.7
-  #   restart: "always"
-  #   container_name: "portfolio"
+  portfolio:
+    env_file:
+      - .env
+    build: ./requirements/bonus/portfolio
+    image: portfolio
+    ports:
+      - "5000:5000"
+    networks:
+      inception:
+        ipv4_address: 198.168.0.7
+    restart: "always"
+    container_name: "portfolio"
 
   #portainer section
   portainer:
