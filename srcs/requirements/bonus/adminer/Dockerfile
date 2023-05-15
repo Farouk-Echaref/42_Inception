@@ -1,6 +1,10 @@
 FROM debian:buster
 
-RUN apt-get update -y & apt install wget -y && apt install php php-mysql  -y
+RUN apt update -y 
+
+RUN apt install wget -y 
+
+RUN apt install php php-mysql  -y
 
 COPY ./tools/adminerScript.sh /
 

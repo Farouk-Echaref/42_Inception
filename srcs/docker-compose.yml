@@ -42,7 +42,6 @@ services:
         DB_USER_PASS: ${DB_USER_PASS}
         DB_HOST: ${DB_HOST}
     image: mariadb #test tag :inception or :latest
-    # ports: don't need to map those containers
     ports:
       - "3306:3306"
     networks:
@@ -91,7 +90,6 @@ services:
     image: nginx
     ports:
       - "443:443"
-      # - "80:80"
     networks:
       inception:
        ipv4_address: 198.168.0.4
@@ -102,26 +100,26 @@ services:
       - wordpress
       # - portfolio
       # - cadvisor
-      # - adminer
+      - adminer
     container_name: "nginx"
 
   #Adminer section
-  # adminer:
-  #   env_file:
-  #     - .env
-  #   build: ./requirements/bonus/adminer
-  #   image: adminer
-  #   ports:
-  #     - "1234:1234"
-  #   networks:
-  #     inception:
-  #       ipv4_address: 198.168.0.5
-  #   volumes:
-  #     - "mariadb:/var/lib/mysql"
-  #   restart: "always"
-  #   depends_on:
-  #     - mariadb
-  #   container_name: "adminer"
+  adminer:
+    env_file:
+      - .env
+    build: ./requirements/bonus/adminer
+    image: adminer
+    ports:
+      - "1234:1234"
+    networks:
+      inception:
+        ipv4_address: 198.168.0.5
+    volumes:
+      - "mariadb:/var/lib/mysql"
+    restart: "always"
+    depends_on:
+      - mariadb
+    container_name: "adminer"
 
   #SVFTP section
   # sftp:
