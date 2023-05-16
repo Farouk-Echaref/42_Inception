@@ -30,6 +30,7 @@ fclean:
 	docker system prune -f  -a --volumes
 	docker network prune -f
 	docker image prune -f
+	docker image rm $(docker images -qa)
 	rm -rf /home/fech-cha/data/mariadb/*
 	rm -rf /home/fech-cha/data/wordpress/*
 

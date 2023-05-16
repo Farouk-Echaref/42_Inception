@@ -29,6 +29,8 @@ if [ ! -f /var/www/html/wp-config.php ]; then
     wp core install --url=$DOMAIN --title=$WP_TITLE --admin_user=$WP_USER --admin_password=$WP_PASS --admin_email=$WP_EMAIL --allow-root
     wp user create $USR $USER_EMAIL --user_pass=$USER_PASSWORD --allow-root
 
+    wp theme install twentytweenty --activate --allow-root
+
 fi
 
 exec php-fpm7.3  -F -R
