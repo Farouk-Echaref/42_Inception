@@ -1,11 +1,11 @@
-FROM debian:buster
+FROM alpine:3.16
 
 ARG FTP_USER \
     FTP_PASSWD
 
-WORKDIR /var/www
+RUN apk update
 
-RUN apt-get update -y & apt install vsftpd -y
+RUN apk add vsftpd
 
 COPY ./tools/sftpScript.sh .
 
@@ -13,6 +13,6 @@ RUN chmod 777 ./sftpScript.sh
 
 COPY ./conf/vsftpd.conf /etc/vsftpd/vsftpd.conf
 
-EXPOSE 21 22
+EXPOSE 21 
 
 CMD ["./sftpScript.sh"]

@@ -3,8 +3,6 @@
 #rm -rf /var/lib/apt/lists/*: This command removes the package lists that 
 #were downloaded during the update process to save disk space inside the container.
 
-# FROM debian:bullseye
-
 FROM alpine:3.16
 
 RUN apk update

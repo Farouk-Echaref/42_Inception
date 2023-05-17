@@ -6,7 +6,7 @@ RUN apt-get update -y
 
 RUN apt-get install -y python3 python3-pip
 
-RUN pip install Flask
+RUN pip3 install Flask
 
 COPY . .
 
