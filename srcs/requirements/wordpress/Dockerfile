@@ -8,6 +8,7 @@ ARG WP_USER \
     WP_TITLE \
     DB_HOST \
     DB_NAME \
+    DB_USER \
     DB_USER_PASS \
     USR \
     USER_EMAIL \

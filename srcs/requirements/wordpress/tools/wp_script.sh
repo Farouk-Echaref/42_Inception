@@ -14,6 +14,8 @@ if [ ! -f /var/www/html/wp-config.php ]; then
     wp --allow-root core download 
     cp wp-config-sample.php wp-config.php
 
+    #set permissions for the wp-config.php
+    chmod 777 /var/www/html/wp-config.php
 
     #set up the database credentials for our installation
     wp config set DB_NAME $DB_NAME --allow-root
@@ -21,18 +23,16 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 	wp config set DB_PASSWORD $DB_USER_PASS --allow-root
 	wp config set DB_HOST $DB_HOST --allow-root
 
-    #set permissions for the wp-config.php
-    chmod 777 /var/www/html/wp-config.php
 
     #install WordPress now, we need to run one last command, while configuring WP-CLI credentials
     wp core install --url=$DOMAIN --title=$WP_TITLE --admin_user=$WP_USER --admin_password=$WP_PASS --admin_email=$WP_EMAIL --allow-root
     wp user create $USR $USER_EMAIL --user_pass=$USER_PASSWORD --allow-root
 
-    wp theme install twentytweenty --activate --allow-root
 
     sed -i "40i define( 'WP_REDIS_HOST', 'redis' );"			/var/www/html/wp-config.php
     sed -i "42i define( 'WP_REDIS_PASSWORD', '$RD_PASS' );"	    /var/www/html/wp-config.php
-
+    wp config set WP_CACHE 'true' --allow-root
+    wp plugin install redis-cache --activate --allow-root
     wp --allow-root redis enable
 
     chown -R www-data:www-data /var/www/html/
