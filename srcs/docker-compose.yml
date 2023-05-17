@@ -123,28 +123,28 @@ services:
 
 
   #SVFTP section
-  # sftp:
-  #   env_file:
-  #     - .env
-  #   build:
-  #     context: .
-  #     dockerfile: requirements/bonus/sftp/Dockerfile
-  #     args:
-  #       FTP_USER: ${FTP_USER}
-  #       FTP_PASSWD: ${FTP_PASSWD}
-  #   image: sftp
-  #   ports:
-  #     - "21:21"
-  #     - "22:22"
-  #   networks:
-  #     inception:
-  #       ipv4_address: 198.168.0.6
-  #   volumes:  
-  #     - "wordpress:/var/www/html"
-  #   restart: "always"
-  #   depends_on:
-  #     - wordpress
-  #   container_name: "sftp"
+  sftp:
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: requirements/bonus/sftp/Dockerfile
+      args:
+        FTP_USER: ${FTP_USER}
+        FTP_PASSWD: ${FTP_PASSWD}
+    image: sftp
+    ports:
+      - "21:21"
+      - "22:22"
+    networks:
+      inception:
+        ipv4_address: 198.168.0.6
+    volumes:  
+      - "wordpress:/var/www/html"
+    restart: "always"
+    depends_on:
+      - wordpress
+    container_name: "sftp"
 
   #Portfolio (static website)
   portfolio:
