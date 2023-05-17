@@ -1,6 +1,5 @@
 #Wordpress Dockerfile
 
-# FROM debian:bullseye
 FROM debian:buster
 
 ARG WP_USER \
@@ -13,8 +12,6 @@ ARG WP_USER \
     USR \
     USER_EMAIL \
     USER_PASSWORD
-
-# RUN chmod -R 777 /var/www/html
 
 RUN mkdir -p /run/php/
 

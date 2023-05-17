@@ -15,14 +15,13 @@ if [ ! -f /var/www/html/wp-config.php ]; then
     cp wp-config-sample.php wp-config.php
 
 
+    #set up the database credentials for our installation
     wp config set DB_NAME $DB_NAME --allow-root
 	wp config set DB_USER $DB_USER --allow-root
 	wp config set DB_PASSWORD $DB_USER_PASS --allow-root
 	wp config set DB_HOST $DB_HOST --allow-root
 
-    #set up the database credentials for our installation
-    # wp --allow-root core config --dbhost=$DB_HOST --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_ROOT_PASS
-
+    #set permissions for the wp-config.php
     chmod 777 /var/www/html/wp-config.php
 
     #install WordPress now, we need to run one last command, while configuring WP-CLI credentials

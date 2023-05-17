@@ -34,6 +34,4 @@ COPY ./conf/create_db.sh .
 
 COPY ./conf/my.cnf  /etc/my.cnf
 
-# USER mysql
-
 ENTRYPOINT ["./create_db.sh"]

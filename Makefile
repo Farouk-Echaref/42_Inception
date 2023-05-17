@@ -1,4 +1,5 @@
 DOCKER_COMPOSE := docker compose
+DOCKER_COMPOSE_FILE=./srcs/docker-compose.yml
 
 
 all : up
@@ -7,31 +8,25 @@ up:
 	mkdir -p /home/fech-cha/data/mariadb
 	mkdir -p /home/fech-cha/data/wordpress
 
-	$(DOCKER_COMPOSE) -f ./srcs/docker-compose.yml up -d --build
+	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) up -d 
 
 down:
-	$(DOCKER_COMPOSE) -f ./srcs/docker-compose.yml down
+	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) down
 
-start:
-	$(DOCKER_COMPOSE) -f ./srcs/docker-compose.yml start
-
-stop:
-	$(DOCKER_COMPOSE) -f ./srcs/docker-compose.yml stop
+build:
+	$(DOCKER_COMPOSE) -f $(DOCKER_COMPOSE_FILE) build
 
 status:
 	@docker ps
 
-logs:
-	$(DOCKER_COMPOSE) logs -f $(CONTAINER_NAME)
-
 fclean: 
-	docker stop $(docker ps -q)
-	docker rm $(docker ps -qa)
-	docker system prune -f  -a --volumes
-	docker network prune -f
-	docker image prune -f
-	docker image rm $(docker images -qa)
-	rm -rf /home/fech-cha/data/mariadb/*
-	rm -rf /home/fech-cha/data/wordpress/*
+	docker stop $(docker ps -q) 2>/dev/null 
+	docker rm $(docker ps -qa) 2>/dev/null 
+	docker system prune -f  -a --volumes 2>/dev/null 
+	docker network prune -f 2>/dev/null 
+	docker image prune -f 2>/dev/null 
+	docker image rm $(docker images -qa) 2>/dev/null 
+	rm -rf /home/fech-cha/data/mariadb/* 2>/dev/null 
+	rm -rf /home/fech-cha/data/wordpress/* 2>/dev/null 
 
 .PHONY: up down start stop status fclean
