@@ -30,6 +30,13 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 
     wp theme install twentytweenty --activate --allow-root
 
+    sed -i "40i define( 'WP_REDIS_HOST', 'redis' );"			/var/www/html/wp-config.php
+    sed -i "42i define( 'WP_REDIS_PASSWORD', '$RD_PASS' );"	    /var/www/html/wp-config.php
+
+    wp --allow-root redis enable
+
+    chown -R www-data:www-data /var/www/html/
+
 fi
 
 exec php-fpm7.3  -F -R
