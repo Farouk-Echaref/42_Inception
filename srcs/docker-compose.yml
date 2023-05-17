@@ -119,29 +119,6 @@ services:
       - mariadb
     container_name: "adminer"
 
-
-  #SVFTP section
-  # sftp:
-  #   env_file:
-  #     - .env
-  #   build: 
-  #     context: ./requirements/bonus/sftp
-  #     args:
-  #       FTP_USER: ${FTP_USER}
-  #       FTP_PASSWD: ${FTP_PASSWD}
-  #   image: sftp
-  #   ports:
-  #     - "21:21"
-  #   networks:
-  #     inception:
-  #       ipv4_address: 198.168.0.6
-  #   volumes:  
-  #     - "wordpress:/var/www/html"
-  #   restart: "always"
-  #   depends_on:
-  #     - wordpress
-  #   container_name: "sftp"
-
   #Portfolio (static website)
   portfolio:
     env_file:
