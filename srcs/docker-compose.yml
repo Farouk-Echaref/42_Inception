@@ -179,5 +179,18 @@ services:
     container_name: "portainer"
 
   # redis:
-
+  redis:
+    env_file:
+      - .env
+    build: ./requirements/bonus/redis
+    image: redis
+    ports:
+      - "6969:6969"
+    networks:
+      inception:
+        ipv4_address: 198.168.0.9
+    volumes:
+      - "wordpress:/var/www/html/"
+    restart: "always"
+    container_name: "redis"
 
