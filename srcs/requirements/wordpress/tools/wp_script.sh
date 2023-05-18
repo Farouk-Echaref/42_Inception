@@ -29,7 +29,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 
 
     wp config set WP_REDIS_HOST 'redis' --allow-root
-	wp config set WP_REDIS_PORT '6969' --allow-root
+	wp config set WP_REDIS_PORT '6379' --allow-root
 	wp config set WP_CACHE 'true' --allow-root
 
 
