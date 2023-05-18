@@ -1,17 +1,21 @@
 #! /bin/sh
 
+
+sed -i 's/\/run\/php\/php7.3-fpm.sock/9000/' /etc/php/7.3/fpm/pool.d/www.conf
+
 if [ ! -f /var/www/html/wp-config.php ]; then
     #WP-CLI is available as a PHP Archive file (.phar). You can download it using either wget or curl commands:
-    wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+   curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
     #You need to make this .phar file executable and move it to /usr/local/bin so that it can be run directly:
     chmod 777 wp-cli.phar
     mv wp-cli.phar /usr/local/bin/wp
 
+    #change to the working directory
     cd /var/www/html
 
     #WP-CLI includes a command to download WordPress
-    wp --allow-root core download 
+    wp core download --allow-root
     cp wp-config-sample.php wp-config.php
 
     #set permissions for the wp-config.php
@@ -24,14 +28,16 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 	wp config set DB_HOST $DB_HOST --allow-root
 
 
+    wp config set WP_REDIS_HOST 'redis' --allow-root
+	wp config set WP_REDIS_PORT '6969' --allow-root
+	wp config set WP_CACHE 'true' --allow-root
+
+
     #install WordPress now, we need to run one last command, while configuring WP-CLI credentials
     wp core install --url=$DOMAIN --title=$WP_TITLE --admin_user=$WP_USER --admin_password=$WP_PASS --admin_email=$WP_EMAIL --allow-root
     wp user create $USR $USER_EMAIL --user_pass=$USER_PASSWORD --allow-root
 
-
-    sed -i "40i define( 'WP_REDIS_HOST', 'redis' );"			/var/www/html/wp-config.php
-    sed -i "42i define( 'WP_REDIS_PASSWORD', '$RD_PASS' );"	    /var/www/html/wp-config.php
-    wp config set WP_CACHE 'true' --allow-root
+    #set up the redis plugin
     wp plugin install redis-cache --activate --allow-root
     wp --allow-root redis enable
 
@@ -39,4 +45,4 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 
 fi
 
-exec php-fpm7.3  -F -R
+exec "$@"

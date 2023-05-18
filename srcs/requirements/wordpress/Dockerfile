@@ -17,9 +17,9 @@ ARG WP_USER \
 
 RUN mkdir -p /run/php/
 
-RUN apt update
+RUN apt-get update 
 
-RUN apt install -y php php-mysqli mariadb-client php7.3-fpm wget
+RUN apt-get install php php7.3-fpm php-mysql curl -y
 
 COPY ./tools/wp_script.sh .
 
@@ -31,4 +31,6 @@ COPY ./conf/php.ini /etc/php/7.3/fpm
 
 EXPOSE 9000
 
-CMD ["sh", "./wp_script.sh"]
+ENTRYPOINT [ "./wp_script.sh" ]
+
+CMD [ "php-fpm7.3", "-F" ]
