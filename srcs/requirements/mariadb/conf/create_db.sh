@@ -1,9 +1,9 @@
 #!/bin/bash
 
-DB_NAME=wordpress
-DB_USER=fech-cha
-DB_USER_PASS=user
-DB_ROOT_PASS=user
+# DB_NAME=wordpress
+# DB_USER=fech-cha
+# DB_USER_PASS=user
+# DB_ROOT_PASS=user
 
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/mariadb.conf.d/50-server.cnf
 
