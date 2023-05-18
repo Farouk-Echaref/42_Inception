@@ -12,8 +12,7 @@ ARG WP_USER \
     DB_USER_PASS \
     USR \
     USER_EMAIL \
-    USER_PASSWORD \ 
-    RD_PASS
+    USER_PASSWORD 
 
 RUN mkdir -p /run/php/
 

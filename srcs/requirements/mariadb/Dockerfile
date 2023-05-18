@@ -14,9 +14,9 @@ RUN apt-get install mariadb-server -y
 
 COPY ./conf/create_db.sh /tmp
 
-RUN chmod 777 /tmp/mariadb.sh
+RUN chmod 777 /tmp/create_db.sh
 
-RUN /tmp/mariadb.sh
+RUN /tmp/create_db.sh
 
 EXPOSE 3306
 

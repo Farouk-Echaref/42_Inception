@@ -50,6 +50,11 @@ services:
     volumes:
       - "mariadb:/var/lib/mysql"
     restart: "always"
+    environment:
+    - "MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS}"
+    - "MARIADB_ROOT_PASSWORD=${DB_ROOT_PASS}"
+    - "MYSQL_USER=${DB_USER}"
+    - "MYSQL_PASSWORD=${DB_USER_PASS}"
     container_name: "mariadb"
 
   #Wordpress section
@@ -70,7 +75,6 @@ services:
         USR: ${USR}
         USER_EMAIL: ${USER_EMAIL}
         USER_PASSWORD: ${USER_PASSWORD}
-        RD_PASS: ${RD_PASS}
     image: wordpress
     ports:
       - "9000:9000"
