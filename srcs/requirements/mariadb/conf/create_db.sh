@@ -1,24 +1,52 @@
-#!/bin/bash
+#!/bin/sh
 
-# DB_NAME=wordpress
-# DB_USER=fech-cha
-# DB_USER_PASS=user
-# DB_ROOT_PASS=user
+#check if /var/lib/mysql/mysql exists, if not MySQL database has not been initialized yet
 
-sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/mariadb.conf.d/50-server.cnf
+if [ ! -d "/var/lib/mysql/mysql" ]; then
 
-service mysql start
+#Sets the owner of the /var/lib/mysql directory and all its contents to the mysql user and group
+        chown -R mysql:mysql /var/lib/mysql
+        chmod -R 777 /var/lib/mysql
 
-mysql -u root -p$DB_ROOT_PASS -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;"
+        # init database
+        # mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --user=mysql --rpm
+        mariadb-install-db --user=root --basedir=/usr --datadir=/var/lib/mysql \
+		--rpm --auth-root-authentication-method=normal \
+		--skip-test-db \
+		--default-time-zone=SYSTEM --enforce-storage-engine= \
+		--skip-log-bin \
+		--expire-logs-days=0 \
+		--loose-innodb_buffer_pool_load_at_startup=0 \
+		--loose-innodb_buffer_pool_dump_at_shutdown=0
 
-mysql -u root -p$DB_ROOT_PASS -e "CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_USER_PASS';"
+fi
 
-mysql -u root -p$DB_ROOT_PASS -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '$DB_ROOT_PASS';"
+#check if wordpress DB laready exist,if not create new one
+# if [ ! -d "/var/lib/mysql/wordpress" ]; then
 
-mysql -u root -p$DB_ROOT_PASS -e "FLUSH PRIVILEGES;"
+        /usr/bin/mysqld --user=root & #--bootstrap < /tmp/create_db.sql
+        MY_SQL_PID=$!
+        # until mariadb -u mysql -e "CREATE DATABASE IF NOT EXISTS ${DB_NAME}" 2>&1 > /dev/null
+        # do
+        #         echo "Not Connected!"
+                sleep 4
+        # done
+        #redirect the output of the following text block to the file
+#         cat << EOF > /tmp/create_db.sql
+# CREATE DATABASE IF NOT EXISTS ${DB_NAME};
+# CREATE USER IF NOT EXISTS '${DB_USER}'@'${DB_HOST}' IDENTIFIED BY '${DB_USER_PASS}';
+# GRANT ALL PRIVILEGES ON '${DB_NAME}'.* TO '${DB_USER}'@'${DB_HOST}';
+# FLUSH PRIVILEGES;
+# EOF
 
-mysql -u root -p$DB_ROOT_PASS -e "GRANT ALL PRIVILEGES ON *.* TO '$DB_USER'@'%';"
+cat > /tmp/create_db.sql << EOF
+CREATE DATABASE IF NOT EXISTS $DB_NAME;
+CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_USER_PASS';
+GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_USER_PASS';
+FLUSH PRIVILEGES;
+EOF
 
-mysql -u root -p$DB_ROOT_PASS -e "FLUSH PRIVILEGES;"
 
-kill `cat /var/run/mysqld/mysqld.pid`
+mysql -u root < /tmp/create_db.sql
+wait $MY_SQL_PID
+# fi
