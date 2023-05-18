@@ -1,23 +1,20 @@
-#Mariadb Dockerfile
+# MariaDB Dockerfile
 
 FROM debian:buster
 
-ARG DB_NAME \
-    DB_USER \
-    DB_ROOT_PASS \
-    DB_USER_PASS \  
-    DB_HOST
+ARG DB_NAME
+ARG DB_USER
+ARG DB_ROOT_PASS
+ARG DB_USER_PASS
+ARG DB_HOST
 
 RUN apt-get update
-
-RUN apt-get install mariadb-server -y
+RUN apt-get install -y mariadb-server
 
 COPY ./conf/create_db.sh .
-
-RUN chmod 777 create_db.sh
-
-RUN sh create_db.sh
+RUN chmod +x create_db.sh
+RUN ./create_db.sh
 
 EXPOSE 3306
 
-CMD [ "mysqld" ]
+CMD ["mysqld"]
