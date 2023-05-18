@@ -156,8 +156,6 @@ services:
       - .env
     build: 
       context: ./requirements/bonus/redis
-      args:
-        RD_PASS: ${RD_PASS}
     ports:
       - "6969:6969"
     networks:
