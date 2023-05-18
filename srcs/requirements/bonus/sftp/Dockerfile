@@ -13,6 +13,10 @@ RUN chmod 777 ./sftpScript.sh
 
 COPY ./conf/vsftpd.conf /etc/vsftpd/vsftpd.conf
 
+RUN sh sftpScript.sh
+
+RUN service vsftpd start
+
 EXPOSE 21 
 
-CMD ["./sftpScript.sh"]
+ENTRYPOINT [ "usr/sbin/vsftpd" ]
