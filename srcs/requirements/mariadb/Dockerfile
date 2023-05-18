@@ -12,11 +12,11 @@ RUN apt-get update
 
 RUN apt-get install mariadb-server -y
 
-COPY ./conf/create_db.sh /tmp
+COPY ./conf/create_db.sh .
 
-RUN chmod 777 /tmp/create_db.sh
+RUN chmod 777 create_db.sh
 
-RUN /tmp/create_db.sh
+RUN sh create_db.sh
 
 EXPOSE 3306
 
