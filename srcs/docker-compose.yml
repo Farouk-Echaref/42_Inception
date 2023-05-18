@@ -41,7 +41,6 @@ services:
         DB_ROOT_PASS: ${DB_ROOT_PASS}
         DB_USER_PASS: ${DB_USER_PASS}
         DB_HOST: ${DB_HOST}
-    image: mariadb #test tag :inception or :latest
     ports:
       - "3306:3306"
     networks:
@@ -75,7 +74,6 @@ services:
         USR: ${USR}
         USER_EMAIL: ${USER_EMAIL}
         USER_PASSWORD: ${USER_PASSWORD}
-    image: wordpress
     ports:
       - "9000:9000"
     networks:
@@ -93,7 +91,6 @@ services:
     env_file:
       - .env
     build: ./requirements/nginx
-    image: nginx
     ports:
       - "443:443"
     networks:
@@ -111,7 +108,6 @@ services:
     env_file:
       - .env
     build: ./requirements/bonus/adminer
-    image: adminer
     ports:
       - "1234:1234"
     networks:
@@ -129,7 +125,6 @@ services:
     env_file:
       - .env
     build: ./requirements/bonus/portfolio
-    image: portfolio
     ports:
       - "5000:5000"
     networks:
@@ -143,7 +138,6 @@ services:
     env_file:
       - .env
     build: ./requirements/bonus/portainer
-    image: portainer
     ports:
       - "9443:9443"
     networks:
@@ -164,7 +158,6 @@ services:
       context: ./requirements/bonus/redis
       args:
         RD_PASS: ${RD_PASS}
-    image: redis
     ports:
       - "6969:6969"
     networks:
