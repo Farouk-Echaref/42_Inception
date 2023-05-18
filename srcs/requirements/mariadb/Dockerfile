@@ -1,37 +1,23 @@
-#Mariadb Dockerfile
+# MariaDB Dockerfile
 
-FROM alpine:3.16
+FROM debian:buster
 
-ARG DB_NAME \
-    DB_USER \
-    DB_ROOT_PASS \
-    DB_USER_PASS \  
-    DB_HOST
+ARG DB_NAME
+ARG DB_USER
+ARG DB_ROOT_PASS
+ARG DB_USER_PASS
+ARG DB_HOST
+
+RUN apt-get update
+RUN apt-get install -y mariadb-server
 
 
-RUN addgroup -S mysql && adduser -S -G mysql mysql
-RUN apk update && apk add --no-cache mariadb mariadb-server-utils mariadb-client
+COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
+COPY ./conf/create_db.sh .
 
-RUN mkdir -p /var/lib/mysql/ \
-	&& mkdir -p /run/mysqld \
-	&& chown mysql:mysql /var/lib/mysql
-
-RUN mkdir -p /var/run/mysqld; \
-    chmod 777 /var/run/mysqld; \
-    { echo '[mysqld]'; \
-      echo 'skip-host-cache'; \
-      echo 'skip-name-resolve'; \
-      echo 'bind-address=0.0.0.0'; \
-    } | tee  /etc/my.cnf.d/docker.cnf; 
-
-COPY ./conf/mariadb-server.cnf  /etc/my.cnf.d/mariadb-server.cnf 
-
-RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
+RUN chmod +x create_db.sh
+RUN ./create_db.sh
 
 EXPOSE 3306
 
-COPY ./conf/create_db.sh .
-
-COPY ./conf/my.cnf  /etc/my.cnf
-
-ENTRYPOINT ["./create_db.sh"]
+CMD ["mysqld"]
