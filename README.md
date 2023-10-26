@@ -9,11 +9,10 @@ I am proud to have successfully met all the requirements of this project and imp
 
   Take look at subject for more info: [subject](https://github.com/Xperaz/inception/blob/main/en.subject.pdf).
 
-![Inception](img/docker.png "Inception")
-
 ## Index
 
 * [Description](#description)
+* [Project Flowchart](#flowchart)
 * [DOCKER](#docker)
     * [WHAT IS DOCKER](#what-is-docker)
     * [CONTAINER AND IMAGES](#containers-and-images)
@@ -29,9 +28,14 @@ I am proud to have successfully met all the requirements of this project and imp
     * [NGINX](#nginx)
     * [MARIADB](#mariadb)
     * [Wordpress](#wordpress)
-* [Project Flowchart](#flowchart)
 * [Installation](#installation)
 * [Ressources](#ressources)
+
+# flowchart
+<br/> <br/> <br/>
+<img src="./img/flowchart.png" alt="inception flowchart" width=85% height=85%>
+<br/> <br/>
+</p>
 
 # docker
   ## what is docker
@@ -159,7 +163,6 @@ A Docker image is lightweight and is typically in the order of kilobytes.
 💡 Note: A Docker image denotes the artifact containing the application, its associated dependencies, and configuration. A running instance of the Docker image is called a container.
 
 A VM instance can be as large as a few gigabytes or even terabytes.
-
 ### 4️⃣ Performance
 
 In terms of performance, Docker containers provide near-native performance. Because they are lightweight, you can start them in a few milliseconds.
@@ -293,11 +296,6 @@ FastCGI handles multiple requests by creating one large process instead of creat
 
 In addition, it is possible to separate the web server and PHP by establishing a PHP server at the back end through socket communication with FastCGI. This is called WAS (Web Application Server) .
 
-## flowchart
-<br/> <br/> <br/>
-<img src="./img/flowchart.png" alt="inception flowchart" width=85% height=85%>
-<br/> <br/>
-</p>
 
 ## installation
   1. Clone the Project folder:
