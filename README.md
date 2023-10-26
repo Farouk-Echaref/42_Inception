@@ -301,7 +301,7 @@ In addition, it is possible to separate the web server and PHP by establishing a
   1. Clone the Project folder:
 
       ```
-       git clone https://github.com/Xperaz/inception.git
+       git clone https://github.com/Farouk-Echaref/42_Inception
      ```
   2. accede to the folder:
 
