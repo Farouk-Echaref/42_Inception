@@ -1,7 +1,12 @@
 # inception (42 project)
 ## description
 
-  Creating a docker-based WordPress LEMP stack using docker-compose on Alpine Linux or Debian Buster. The whole project has to be done in our personal virtual machine.
+  Docker Infrastructure, inside Virtual Machine, inside my computer.
+   This project aims to broaden your knowledge of system administration by using Docker. It involves setting up an infrastructure of various services using Docker Compose within a virtual machine. My responsibilities included building and configuring dedicated containers for each service, creating and managing volumes for the WordPress database and website files, and creating a Docker network to establish connections between the containers.
+One of the key requirements of the project was to build my own Docker images from the latest stable versions of Alpine or Debian and to write my own Dockerfiles. Additionally, I was responsible for configuring NGINX to use only the latest secure versions of the TLS protocol, and ensuring that all services were able to restart in the event of a crash.
+Throughout the project, I employed best practices for writing Dockerfiles, using environment variables and working with PID 1. I also used my own domain name and was responsible for configuring it to point to my local IP address.
+I am proud to have successfully met all the requirements of this project and improve my skills in Docker, and Network administration.
+
   Take look at subject for more info: [subject](https://github.com/Xperaz/inception/blob/main/en.subject.pdf).
 
 ![Inception](img/docker.png "Inception")
